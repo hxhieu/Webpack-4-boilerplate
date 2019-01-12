@@ -4,7 +4,8 @@
   "author": "mwieth",
   "dependencies": {
     "craftyjs": "^0.9.0",
-    "css-reset-and-normalize": "^1.0.1"
+    "css-reset-and-normalize": "^1.0.1",
+    "global": "^4.3.2"
   },
   "devDependencies": {
     "autoprefixer": "^8.6.5",
@@ -13,6 +14,13 @@
     "babel-preset-env": "^1.7.0",
     "clean-webpack-plugin": "^0.1.19",
     "css-loader": "^0.28.11",
+    "eslint": "^5.12.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-loader": "^2.1.1",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^8.0.1",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0",
     "html-webpack-plugin": "^3.2.0",
     "mini-css-extract-plugin": "^0.4.5",
     "node-sass": "^4.11.0",
@@ -27,8 +35,8 @@
   "license": "ISC",
   "main": "index.js",
   "scripts": {
-    "build:dev": "webpack-dev-server --env dev --mode none",
-    "build:prod": "webpack --env prod --mode production",
-    "build:watch": "webpack-dev-server --env dev --mode none"
+    "build": "webpack --env prod --mode production",
+    "dev": "webpack-dev-server --env dev --mode none",
+    "lint": "eslint ./src/**/*.js"
   }
 }

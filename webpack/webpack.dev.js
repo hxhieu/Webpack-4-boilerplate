@@ -1,62 +1,37 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const {
-  prod_Path,
-  src_Path
-} = require('./path');
-const {
-  selectedPreprocessor
-} = require('./loader');
+  prodPath,
+  srcPath
+} = require('./path')
 
 module.exports = {
   entry: {
-    main: './' + src_Path + '/index.js'
+    main: './' + srcPath + '/index.js'
   },
   output: {
-    path: path.resolve(__dirname, prod_Path),
+    path: path.resolve(__dirname, prodPath),
     filename: '[name].[chunkhash].js'
   },
-  //devtool: 'cheap-module-source-map',
+  // devtool: 'cheap-module-source-map',
   devtool: 'source-map',
   module: {
-    rules: [{
-      test: selectedPreprocessor.fileRegexp,
-      use: [{
-          loader: MiniCssExtractPlugin.loader
-        },
-        {
-          loader: 'css-loader',
-          options: {
-            modules: false,
-            sourceMap: true
-          }
-        },
-        {
-          loader: 'postcss-loader',
-          options: {
-            sourceMap: true
-          }
-        },
-        {
-          loader: selectedPreprocessor.loaderName,
-          options: {
-            sourceMap: true
-          }
-        },
-      ]
-    }]
+    rules: [
+      {
+        enforce: 'pre',
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'eslint-loader'
+      }
+    ]
   },
   plugins: [
-    new MiniCssExtractPlugin({
-      filename: 'style.css',
-    }),
     new HtmlWebpackPlugin({
       inject: false,
       hash: false,
-      template: './' + src_Path + '/index.html',
+      template: './' + srcPath + '/index.html',
       filename: 'index.html'
     })
   ]
-};
+}
